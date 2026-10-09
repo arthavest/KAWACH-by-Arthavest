@@ -1,0 +1,6 @@
+{
+  "name": "KAWACH — Nepal Investment & Risk Platform",
+  "description": "ARTHAVEST KAWACH & ATH Capital: Aladdin-grade risk console, live NEPSE market analytics, ATH50 index fund, gold & real estate ETFs, and Zerodha-style trading & cost transparency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

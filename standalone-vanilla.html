@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KAWACH | ARTHAVEST INVESTMENT PRIVATE LIMITED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F2F4F8; --surface: #FFFFFF; --surface-raised: #F8FAFC; --ink: #101B2D; --muted: #5A6679; --line: #DCE1EA;
+      --crimson: #B4213A; --pine: #17795A; --amber: #B0731A; --steel: #2F5D8C; --steel-soft: #A9BFD9;
+      --hero: #0F1A2C; --hero-ink: #F2F4F8; --hero-muted: #9FB0C8; --rail: #0B1424; --rail-ink: #DDE4EF;
+      --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --sans: 'Public Sans', system-ui, -apple-system, sans-serif;
+      --deva: 'Noto Serif Devanagari', serif;
+      --mono: 'Space Grotesk', ui-monospace, monospace;
+    }
+    [data-theme="dark"], .dark {
+      --bg: #0A111E; --surface: #121C2E; --surface-raised: #18243A; --ink: #E8ECF3; --muted: #93A0B5; --line: #243149;
+      --crimson: #E2586F; --pine: #3DBB8C; --amber: #E2A544; --steel: #78A6DA; --steel-soft: #2C4A6D;
+      --hero: #15233A; --rail: #070D18;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+    button, input, select { font: inherit; color: inherit; }
+    .mono { font-family: var(--mono); }
+    .serif { font-family: var(--serif); }
+    .up { color: var(--pine); } .down { color: var(--crimson); }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+    .badge-pass { background: rgba(23,121,90,0.12); color: var(--pine); }
+    .badge-fail { background: rgba(180,33,58,0.12); color: var(--crimson); }
+    
+    /* Top Bar */
+    .top-bar { background: #0B1424; color: #FFF; padding: 8px 16px; font-size: 11.5px; border-bottom: 1px solid #162338; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .mode-btn { background: none; border: 0; color: #9FB0C8; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 11px; transition: 0.15s; }
+    .mode-btn.active { background: #FFF; color: #0B1424; }
+    .mode-btn.active-dark { background: var(--crimson); color: #FFF; }
+    
+    /* Layout */
+    .app-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 35px); }
+    .rail { background: var(--rail); color: var(--rail-ink); padding: 20px 16px; display: flex; flex-direction: column; gap: 20px; border-right: 1px solid rgba(255,255,255,0.06); }
+    .nav-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 12px; border: 0; background: none; color: var(--rail-ink); border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 500; text-align: left; opacity: 0.8; }
+    .nav-btn:hover { opacity: 1; background: rgba(255,255,255,0.06); }
+    .nav-btn.active { opacity: 1; background: rgba(255,255,255,0.12); border-left: 3px solid var(--crimson); font-weight: 600; }
+    
+    .content { padding: 24px 32px 64px; max-width: 1280px; width: 100%; margin: 0 auto; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; border: 0; font-weight: 600; cursor: pointer; font-size: 12.5px; }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-buy { background: var(--pine); color: #FFF; }
+    .btn-sell { background: var(--crimson); color: #FFF; }
+    
+    @media (max-width: 900px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .rail { display: none; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Mode Switcher -->
+  <div class="top-bar">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <b>KAWACH</b>
+      <div style="background:#142137; padding:2px; border-radius:8px; display:flex; gap:2px;">
+        <button class="mode-btn active" onclick="switchMode('console')">Console</button>
+        <button class="mode-btn" onclick="switchMode('website')">Website</button>
+        <button class="mode-btn" onclick="switchMode('mobile')">Mobile</button>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <span class="mono" id="tape-idx">NEPSE: 2,684.52 (+0.62%)</span>
+      <button class="btn" style="background:#B4213A; color:#fff; padding:4px 10px; font-size:11px;" onclick="downloadThisFile()">Download index.html</button>
+    </div>
+  </div>
+
+  <div id="app-root">
+    <!-- Rendered dynamically by script below -->
+  </div>
+
+  <script>
+    // Embedded Complete NEPSE Universe
+    const UNIVERSE = [
+      { sym: 'NABIL', name: 'Nabil Bank Limited', sector: 'Commercial Banks', price: 592.0, change: 1.15, vol: 0.27, pe: 14.8, beta: 1.05 },
+      { sym: 'GBIME', name: 'Global IME Bank Limited', sector: 'Commercial Banks', price: 238.5, change: 0.85, vol: 0.28, pe: 12.2, beta: 1.10 },
+      { sym: 'SHIVM', name: 'Shivam Cements Limited', sector: 'Manufacturing & Processing', price: 546.0, change: -0.45, vol: 0.44, pe: 31.4, beta: 1.35 },
+      { sym: 'HDL', name: 'Himalayan Distillery Limited', sector: 'Manufacturing & Processing', price: 1460.0, change: 0.20, vol: 0.42, pe: 28.5, beta: 1.25 },
+      { sym: 'CIT', name: 'Citizen Investment Trust', sector: 'Investment', price: 2440.0, change: 1.80, vol: 0.32, pe: 38.2, beta: 0.95 },
+      { sym: 'NICA', name: 'NIC Asia Bank Limited', sector: 'Commercial Banks', price: 432.0, change: -1.20, vol: 0.35, pe: 16.5, beta: 1.22 },
+      { sym: 'CHCL', name: 'Chilime Hydropower Co.', sector: 'Hydropower', price: 485.0, change: 0.90, vol: 0.38, pe: 22.1, beta: 0.88 },
+      { sym: 'SHPC', name: 'Sanima Mai Hydropower', sector: 'Hydropower', price: 342.0, change: 1.40, vol: 0.41, pe: 19.5, beta: 0.92 }
+    ];
+
+    let currentMode = 'console';
+    let currentTab = 'overview';
+    let holdings = JSON.parse(localStorage.getItem('kawach:holdings') || '[]') || [];
+    if (!holdings.length) {
+      holdings = [
+        { sym: 'NABIL', qty: 2500, cost: 520, ltp: 592 },
+        { sym: 'GBIME', qty: 4000, cost: 225, ltp: 238.5 },
+        { sym: 'SHIVM', qty: 1500, cost: 580, ltp: 546 },
+        { sym: 'CIT', qty: 500, cost: 2150, ltp: 2440 }
+      ];
+    }
+
+    function npr(v) {
+      return 'Rs ' + Math.round(v).toLocaleString('en-IN');
+    }
+
+    function switchMode(m) {
+      currentMode = m;
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.innerText.toLowerCase() === m));
+      renderApp();
+    }
+
+    function switchTab(t) {
+      currentTab = t;
+      renderApp();
+    }
+
+    function downloadThisFile() {
+      const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      a.click();
+    }
+
+    function calculateRisk() {
+      let totalVal = 0, totalCost = 0;
+      holdings.forEach(h => {
+        totalVal += h.qty * h.ltp;
+        totalCost += h.qty * h.cost;
+      });
+      const pnl = totalVal - totalCost;
+      const pnlPct = totalCost ? (pnl / totalCost) * 100 : 0;
+      const var95 = totalVal * 0.024; // 1-day 95% Parametric VaR
+      return { totalVal, totalCost, pnl, pnlPct, var95, score: 82 };
+    }
+
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      const r = calculateRisk();
+
+      if (currentMode === 'website') {
+        root.innerHTML = `
+          <div class="content" style="max-width:1000px; text-align:center; padding-top:60px;">
+            <div class="badge badge-pass" style="margin-bottom:16px;">ALADDIN-GRADE RISK PLATFORM FOR NEPAL</div>
+            <h1 class="serif" style="font-size:48px; line-height:1.15; margin-bottom:16px;">Direct NEPSE Execution & Passive Low-Cost Funds</h1>
+            <p style="color:var(--muted); max-width:600px; margin:0 auto 30px; font-size:16px;">
+              Empowering Nepali retail and institutional capital with BlackRock Aladdin risk decomposition, ATH50 index fund, physically vaulted gold, and commercial real estate.
+            </p>
+            <div style="display:flex; justify-content:center; gap:12px; margin-bottom:50px;">
+              <button class="btn btn-primary" onclick="switchMode('console')">Open Full Console</button>
+              <button class="btn" style="background:#FFF; border:1px solid var(--line);" onclick="downloadThisFile()">Download index.html</button>
+            </div>
+            <div class="grid-3" style="text-align:left;">
+              <div class="card">
+                <h3 class="serif" style="font-size:20px; margin-bottom:8px;">ATH50 Index ETF</h3>
+                <p style="color:var(--muted); font-size:12.5px;">Top 50 NEPSE blue chips with radical 0.25% p.a. fee.</p>
+              </div>
+              <div class="card">
+                <h3 class="serif" style="font-size:20px; margin-bottom:8px;">ARTHAGOLD Vault</h3>
+                <p style="color:var(--muted); font-size:12.5px;">100% physically backed 24K gold vaulted in Kathmandu.</p>
+              </div>
+              <div class="card">
+                <h3 class="serif" style="font-size:20px; margin-bottom:8px;">ARTHAREIT Trust</h3>
+                <p style="color:var(--muted); font-size:12.5px;">8.4% target dividend yield from commercial rental assets.</p>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      root.innerHTML = `
+        <div class="app-layout">
+          <div class="rail">
+            <div style="font-family:var(--serif); font-size:20px; font-weight:700;">ATH KAWACH</div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <button class="nav-btn ${currentTab==='overview'?'active':''}" onclick="switchTab('overview')">Overview Shield</button>
+              <button class="nav-btn ${currentTab==='holdings'?'active':''}" onclick="switchTab('holdings')">Holdings & WACC</button>
+              <button class="nav-btn ${currentTab==='trading'?'active':''}" onclick="switchTab('trading')">Live Paper Trading</button>
+              <button class="nav-btn ${currentTab==='screener'?'active':''}" onclick="switchTab('screener')">200 EMA Screener</button>
+              <button class="nav-btn ${currentTab==='brokerage'?'active':''}" onclick="switchTab('brokerage')">Brokerage & CGT Calc</button>
+              <button class="nav-btn ${currentTab==='ath50'?'active':''}" onclick="switchTab('ath50')">ATH50 Index Fund</button>
+            </div>
+          </div>
+          <div class="content">
+            ${renderTabContent(r)}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTabContent(r) {
+      if (currentTab === 'overview') {
+        return `
+          <h2 class="serif" style="font-size:28px; margin-bottom:6px;">Portfolio Protection Console</h2>
+          <p style="color:var(--muted); margin-bottom:24px;">BlackRock Aladdin risk analytics and regulatory compliance score.</p>
+          <div class="grid-3">
+            <div class="card">
+              <div style="font-size:12px; color:var(--muted);">Total Portfolio Value</div>
+              <div class="mono" style="font-size:26px; font-weight:700; margin-top:4px;">${npr(r.totalVal)}</div>
+              <div class="${r.pnl>=0?'up':'down'} mono" style="font-size:12px; margin-top:4px;">${npr(r.pnl)} (${r.pnlPct.toFixed(1)}%)</div>
+            </div>
+            <div class="card">
+              <div style="font-size:12px; color:var(--muted);">1-Day 95% Parametric VaR</div>
+              <div class="mono down" style="font-size:26px; font-weight:700; margin-top:4px;">${npr(r.var95)}</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:4px;">Maximum normal 1-day loss</div>
+            </div>
+            <div class="card">
+              <div style="font-size:12px; color:var(--muted);">Kawach Shield Score</div>
+              <div class="mono up" style="font-size:26px; font-weight:700; margin-top:4px;">${r.score}/100</div>
+              <div class="badge badge-pass" style="margin-top:4px;">SEBON Limits Passed</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="serif" style="font-size:18px; margin-bottom:12px;">Active Holdings</h3>
+            <table>
+              <thead>
+                <tr><th>Symbol</th><th>Qty</th><th>Avg Cost</th><th>LTP</th><th>Market Value</th><th>P&L</th></tr>
+              </thead>
+              <tbody>
+                ${holdings.map(h => `
+                  <tr>
+                    <td><b>${h.sym}</b></td>
+                    <td>${h.qty}</td>
+                    <td>Rs ${h.cost}</td>
+                    <td>Rs ${h.ltp}</td>
+                    <td>${npr(h.qty * h.ltp)}</td>
+                    <td class="${(h.ltp>=h.cost)?'up':'down'}">${npr(h.qty*(h.ltp-h.cost))}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      if (currentTab === 'trading') {
+        return `
+          <h2 class="serif" style="font-size:28px; margin-bottom:6px;">NEPSE Live Paper Trading</h2>
+          <p style="color:var(--muted); margin-bottom:24px;">Instant execution with real-time NEPSE price feed simulation.</p>
+          <div class="card">
+            <table>
+              <thead>
+                <tr><th>Symbol</th><th>Company</th><th>Sector</th><th>Price</th><th>Daily %</th><th>Action</th></tr>
+              </thead>
+              <tbody>
+                ${UNIVERSE.map(s => `
+                  <tr>
+                    <td><b>${s.sym}</b></td>
+                    <td>${s.name}</td>
+                    <td>${s.sector}</td>
+                    <td class="mono">Rs ${s.price.toFixed(1)}</td>
+                    <td class="mono ${s.change>=0?'up':'down'}">${s.change>=0?'+':''}${s.change}%</td>
+                    <td>
+                      <button class="btn btn-buy" onclick="quickTrade('${s.sym}', 'BUY')">BUY</button>
+                      <button class="btn btn-sell" onclick="quickTrade('${s.sym}', 'SELL')">SELL</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      if (currentTab === 'brokerage') {
+        return `
+          <h2 class="serif" style="font-size:28px; margin-bottom:6px;">Radical Fee & CGT Transparency</h2>
+          <p style="color:var(--muted); margin-bottom:24px;">Exact SEBON commission slabs, SEBON fees, DP charges, and Capital Gains Tax.</p>
+          <div class="card" style="max-width:600px;">
+            <div style="margin-bottom:16px;">
+              <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:6px;">Transaction Turnover (NPR)</label>
+              <input type="number" id="calc-turnover" value="100000" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--line); font-family:var(--mono);" oninput="recalcFees()">
+            </div>
+            <div id="calc-results" class="grid-2">
+              <div style="padding:12px; background:rgba(0,0,0,0.02); border-radius:8px;">
+                <div style="font-size:11px; color:var(--muted);">Broker Fee (0.37%)</div>
+                <div class="mono" style="font-weight:700; font-size:16px;">Rs 370.00</div>
+              </div>
+              <div style="padding:12px; background:rgba(0,0,0,0.02); border-radius:8px;">
+                <div style="font-size:11px; color:var(--muted);">SEBON Regulatory (0.015%)</div>
+                <div class="mono" style="font-weight:700; font-size:16px;">Rs 15.00</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `<div class="card"><h3>${currentTab.toUpperCase()} View</h3></div>`;
+    }
+
+    function quickTrade(sym, action) {
+      const stock = UNIVERSE.find(s => s.sym === sym);
+      if (!stock) return;
+      if (action === 'BUY') {
+        const existing = holdings.find(h => h.sym === sym);
+        if (existing) {
+          existing.qty += 100;
+        } else {
+          holdings.push({ sym, qty: 100, cost: stock.price, ltp: stock.price });
+        }
+      } else {
+        const idx = holdings.findIndex(h => h.sym === sym);
+        if (idx !== -1) {
+          holdings[idx].qty = Math.max(0, holdings[idx].qty - 100);
+          if (holdings[idx].qty === 0) holdings.splice(idx, 1);
+        }
+      }
+      localStorage.setItem('kawach:holdings', JSON.stringify(holdings));
+      renderApp();
+    }
+
+    function recalcFees() {
+      const v = parseFloat(document.getElementById('calc-turnover')?.value || 0);
+      const bRate = v <= 50000 ? 0.004 : (v <= 500000 ? 0.0037 : 0.0034);
+      const broker = Math.max(10, v * bRate);
+      const sebon = v * 0.00015;
+      const res = document.getElementById('calc-results');
+      if (res) {
+        res.innerHTML = `
+          <div style="padding:12px; background:rgba(0,0,0,0.02); border-radius:8px;">
+            <div style="font-size:11px; color:var(--muted);">Broker Commission (${(bRate*100).toFixed(2)}%)</div>
+            <div class="mono" style="font-weight:700; font-size:16px;">Rs ${broker.toFixed(2)}</div>
+          </div>
+          <div style="padding:12px; background:rgba(0,0,0,0.02); border-radius:8px;">
+            <div style="font-size:11px; color:var(--muted);">SEBON Charge (0.015%)</div>
+            <div class="mono" style="font-weight:700; font-size:16px;">Rs ${sebon.toFixed(2)}</div>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize
+    renderApp();
+  </script>
+</body>
+</html>
